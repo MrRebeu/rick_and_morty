@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_loader.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 14:33:30 by abkhefif          #+#    #+#             */
+/*   Updated: 2025/06/03 14:35:44 by abkhefif         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 int	load_basic_textures(t_game *game)
@@ -62,61 +74,31 @@ static int	load_texture(t_game *game, t_img *tex, char *path)
 	int	width;
 	int	height;
 
-	printf("DEBUG: load_texture called with path: %s\n", path);
-	printf("DEBUG: game->mlx = %p\n", game->mlx);
-	
 	if (!game->mlx)
 	{
-		printf("DEBUG: MLX not initialized!\n");
 		return (0);
 	}
-	
-	printf("DEBUG: Calling mlx_xpm_file_to_image\n");
 	tex->ptr = mlx_xpm_file_to_image(game->mlx, path, &width, &height);
-	
-	printf("DEBUG: mlx_xpm_file_to_image returned: %p\n", tex->ptr);
 	if (!tex->ptr)
 	{
-		printf("DEBUG: Failed to load texture: %s\n", path);
 		return (0);
 	}
-	
-	printf("DEBUG: Setting texture dimensions\n");
 	tex->width = width;
 	tex->height = height;
-	
-	printf("DEBUG: Getting data address\n");
 	tex->addr = mlx_get_data_addr(tex->ptr, &tex->bits_per_pixel,
 			&tex->line_length, &tex->endian);
-	
-	printf("DEBUG: load_texture success for %s\n", path);
 	return (1);
 }
 
 int	load_directional_textures(t_game *game, t_texture_paths *paths)
 {
-	printf("DEBUG: load_directional_textures called\n");
-	printf("DEBUG: paths->north = %s\n", paths->north);
-	printf("DEBUG: paths->south = %s\n", paths->south);
-	printf("DEBUG: paths->east = %s\n", paths->east);
-	printf("DEBUG: paths->west = %s\n", paths->west);
-	
-	printf("DEBUG: Loading north texture\n");
 	if (!load_texture(game, &game->map.north, paths->north))
 		return (0);
-	
-	printf("DEBUG: Loading south texture\n");
 	if (!load_texture(game, &game->map.south, paths->south))
 		return (0);
-	
-	printf("DEBUG: Loading east texture\n");
 	if (!load_texture(game, &game->map.east, paths->east))
 		return (0);
-	
-	printf("DEBUG: Loading west texture\n");
 	if (!load_texture(game, &game->map.west, paths->west))
 		return (0);
-	
-	printf("DEBUG: All textures loaded successfully\n");
 	return (1);
 }

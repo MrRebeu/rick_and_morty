@@ -1,13 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*   weapon_pickup_render.c                            :+:      :+:    :+:   */
+/*                                                        :::      ::::::::   */
+/*   weapon_pickup_render.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcaccava <tcaccava@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 XX:XX:XX by tcaccava          #+#    #+#             */
-/*   Updated: 2025/05/26 XX:XX:XX by tcaccava         ###   ########.fr       */
+/*   Created: 2025/06/03 14:15:40 by abkhefif          #+#    #+#             */
+/*   Updated: 2025/06/03 14:15:58 by abkhefif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../cube3d.h"
 
 void	render_weapon_pickup(t_game *game, t_weapon_pickup *weapon)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcaccava <tcaccava@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:09:16 by tcaccava          #+#    #+#             */
-/*   Updated: 2025/05/26 23:09:21 by tcaccava         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:37:07 by abkhefif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ typedef struct s_player
 	double				angle;
 	double				fov;
 	int					move_speed;
-	int					rot_speed;
+	double				rot_speed;
 	bool				key_down;
 	bool				key_up;
 	bool				key_right;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shoot_portal.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 14:17:45 by abkhefif          #+#    #+#             */
+/*   Updated: 2025/06/03 14:17:46 by abkhefif         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cube3d.h"
 
 void	shoot_portalgun(t_game *game)
@@ -11,16 +23,16 @@ int	calculate_portal_orientation(t_ray *center_ray)
 	if (center_ray->hit_vertical)
 	{
 		if (cos(center_ray->radiant_angle) > 0)
-			return (1);  // East - portail face à l'Est
+			return (1);
 		else
-			return (3);  // West - portail face à l'Ouest
+			return (3);
 	}
 	else
 	{
 		if (sin(center_ray->radiant_angle) > 0)
-			return (2);  // South - portail face au Sud
+			return (2);
 		else
-			return (0);  // North - portail face au Nord
+			return (0);
 	}
 }
 
