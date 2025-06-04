@@ -1,10 +1,5 @@
 #include "cube3d.h"
 
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
 int parse_color(char *color_str, int *color)
 {
 	char *str;
@@ -93,7 +88,7 @@ int process_line(char *line , t_scene_data *scene, t_game *game)
 	if (*line_content == '\0' || *line_content == '\n')
 		return (1);
 	if (scene->map_started)
-		return (add_map_line(line_content, game, content));
+		return (add_map_line(line_content, game, scene));
 	if (ft_strncmp(line_content, "NO ", 3) == 0)
 		return (parse_texture(line_content + 3, &scene->north_texture));
 	if (ft_strncmp(line_content, "SO ", 3) == 0)
@@ -125,13 +120,6 @@ int add_map_line(char *line, t_game *game, t_scene_data *scene)
 	scene->map_count++;
 	return (1);
 }
-void clean_line_ending(char *line)
-{
-	int len = ft_strlen(line);
-	if (len > 0 && line[len - 1] == '\n')
-		line[len - 1] = '\0';
-}
-
 int finalize_parsing(t_scene_data *scene, t_game *game)
 {
 	t_texture_paths	paths;
@@ -157,23 +145,45 @@ int finalize_parsing(t_scene_data *scene, t_game *game)
 	if (!set_player_pos(game))
 		return (printf("Error: No player position found\n"), 0);
 	
-	// Charge les textures
+	// Charge les textures directionnelles
 	paths.north = scene->north_texture;
 	paths.south = scene->south_texture;
 	paths.east = scene->east_texture;
 	paths.west = scene->west_texture;
 	if (!load_directional_textures(game, &paths))
-		return (printf("Error: Failed to load textures\n"), 0);
+		return (printf("Error: Failed to load directional textures\n"), 0);
 	
-	// Charge le reste du jeu
+	// ✅ Charge TOUTES les textures spéciales
+	if (!load_special_textures(game))
+		return (printf("Error: Failed to load special textures\n"), 0);
+	
+	if (!load_door_textures(game))
+		return (printf("Error: Failed to load door textures\n"), 0);
+	
+	// ✅ Charge TOUS les assets du jeu
 	game->current_weapon = HANDS;
-	if (!load_all_weapons(game) || !load_weapon_pickup_sprites(game) || 
-		!set_weapon_positions(game) || !load_open_door_sprites(game) || 
-		!set_open_door_positions(game) || !init_all_enemies(game))
-		return (printf("Error: Failed to load game assets\n"), 0);
+	if (!load_all_weapons(game))
+		return (printf("Error: Failed to load weapons\n"), 0);
 	
+	if (!load_weapon_pickup_sprites(game))
+		return (printf("Error: Failed to load weapon pickups\n"), 0);
+	
+	if (!set_weapon_positions(game))
+		return (printf("Error: Failed to set weapon positions\n"), 0);
+	
+	if (!load_open_door_sprites(game))
+		return (printf("Error: Failed to load door sprites\n"), 0);
+	
+	if (!set_open_door_positions(game))
+		return (printf("Error: Failed to set door positions\n"), 0);
+	
+	if (!init_all_enemies(game))
+		return (printf("Error: Failed to init enemies\n"), 0);
+	
+	// ✅ Initialise les systèmes
 	init_portals(game);
 	init_ui_components(game);
+	
 	printf("✅ Game initialized!\n");
 	return (1);
 }

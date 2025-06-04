@@ -6,7 +6,7 @@
 /*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:09:16 by tcaccava          #+#    #+#             */
-/*   Updated: 2025/06/04 16:15:41 by abkhefif         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:30:07 by abkhefif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1124,7 +1124,7 @@ int	validate_and_load_scene(t_scene_data *scene, t_game *game);
 
 
 int finalize_parsing(t_scene_data *scene, t_game *game);
-void clean_line_ending(char *line);
+void	clean_line_ending(char *line);
 int add_map_line(char *line, t_game *game, t_scene_data *scene);
 int process_line(char *line , t_scene_data *scene, t_game *game);
 int parse_cub_file(char *filename, t_game *game);

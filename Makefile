@@ -20,7 +20,7 @@ LASER_SRC = laser/laser.c laser/render_laser.c
 HEAL_SRC = heal/heal_system.c heal/heal_animation.c heal/heal_render.c heal/heal_utils.c heal/heal_loader.c
 WALLS_SRC = walls/wall_basic.c walls/wall_shot.c walls/wall_portal.c walls/wall_textures.c walls/wall_utils.c
 WEAPON_SRC = weapon/weapon_core.c weapon/weapon_render.c weapon/weapon_utils.c weapon/weapon_loader.c weapon/weapon_pickcup_render_2.c weapon/weapon_render_2.c weapon/weapon_utils_2.c weapon/weapon_shoot_2.c
-SRCS = $(CORE_SRC) $(RAYCASTER_SRC) $(MAP_SRC) $(PLAYER_SRC) $(RENDER_SRC) $(GNL_SRC) $(ENEMY_SRC) $(SHOOT_SRC) $(PORTAL_SRC) $(UI_SRC) $(DOOR_SRC) $(LASER_SRC) $(HEAL_SRC) $(WALLS_SRC)
+SRCS = $(CUB_PARSER_SRC) $(CORE_SRC) $(RAYCASTER_SRC) $(MAP_SRC) $(PLAYER_SRC) $(RENDER_SRC) $(GNL_SRC) $(ENEMY_SRC) $(SHOOT_SRC) $(PORTAL_SRC) $(UI_SRC) $(DOOR_SRC) $(LASER_SRC) $(HEAL_SRC) $(WALLS_SRC)
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
