@@ -129,61 +129,42 @@ int finalize_parsing(t_scene_data *scene, t_game *game)
 		return (printf("Error: Missing texture(s)\n"), 0);
 	if (scene->map_count == 0)
 		return (printf("Error: No map found\n"), 0);
-	
-	// Termine la matrice et calcule dimensions
 	game->map.matrix[scene->map_count] = NULL;
 	game->map.height = scene->map_count;
 	game->map.width = calculate_map_width(game);
 	game->map.floor_color = scene->floor_color;
 	game->map.sky_color = scene->ceiling_color;
-	
-	// Initialise tout le jeu
 	if (!init_mlx_window(game))
 		return (printf("Error: MLX init failed\n"), 0);
 	init_player(&game->player);
 	game->player.game = game;
 	if (!set_player_pos(game))
 		return (printf("Error: No player position found\n"), 0);
-	
-	// Charge les textures directionnelles
 	paths.north = scene->north_texture;
 	paths.south = scene->south_texture;
 	paths.east = scene->east_texture;
 	paths.west = scene->west_texture;
 	if (!load_directional_textures(game, &paths))
 		return (printf("Error: Failed to load directional textures\n"), 0);
-	
-	// ✅ Charge TOUTES les textures spéciales
 	if (!load_special_textures(game))
 		return (printf("Error: Failed to load special textures\n"), 0);
-	
 	if (!load_door_textures(game))
 		return (printf("Error: Failed to load door textures\n"), 0);
-	
-	// ✅ Charge TOUS les assets du jeu
 	game->current_weapon = HANDS;
 	if (!load_all_weapons(game))
 		return (printf("Error: Failed to load weapons\n"), 0);
-	
 	if (!load_weapon_pickup_sprites(game))
 		return (printf("Error: Failed to load weapon pickups\n"), 0);
-	
 	if (!set_weapon_positions(game))
 		return (printf("Error: Failed to set weapon positions\n"), 0);
-	
 	if (!load_open_door_sprites(game))
 		return (printf("Error: Failed to load door sprites\n"), 0);
-	
 	if (!set_open_door_positions(game))
 		return (printf("Error: Failed to set door positions\n"), 0);
-	
 	if (!init_all_enemies(game))
 		return (printf("Error: Failed to init enemies\n"), 0);
-	
-	// ✅ Initialise les systèmes
 	init_portals(game);
 	init_ui_components(game);
-	
 	printf("✅ Game initialized!\n");
 	return (1);
 }
