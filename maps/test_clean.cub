@@ -2,6 +2,7 @@ NO ./texture/north.xpm
 SO ./texture/wall.xpm
 WE ./texture/wall.xpm
 EA ./texture/wall.xpm
+
 F 0,100,0
 C 25,25,112
 

@@ -6,19 +6,11 @@
 /*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:33:26 by abkhefif          #+#    #+#             */
-/*   Updated: 2025/06/04 17:12:38 by abkhefif         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:15:45 by abkhefif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-int close_window(t_game *game)
-{
-	(void)game;
-	printf("Closing game..\n");
-	exit(0);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {
