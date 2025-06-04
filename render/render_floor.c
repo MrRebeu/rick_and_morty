@@ -6,7 +6,7 @@
 /*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:18:09 by abkhefif          #+#    #+#             */
-/*   Updated: 2025/06/04 16:45:24 by abkhefif         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:06:42 by abkhefif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	render_ceiling(t_game *game, int column_x, t_render *renderer)
 	unsigned int	ceiling_color;
 
 	y = 0;
-	// ceiling_color = 0xc8b06e;
 	ceiling_color = game->map.sky_color;
 	while (y < renderer->draw_start)
 	{
@@ -35,7 +34,6 @@ void	render_floor_section(t_game *game, int column_x, t_render *renderer)
 	unsigned int	floor_color;
 
 	y = renderer->draw_end + 1;
-	// floor_color = 0x394156;
 	floor_color = game->map.floor_color;
 	while (y < DISPLAY_HEIGHT)
 	{

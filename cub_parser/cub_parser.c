@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abkhefif <abkhefif@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/04 17:09:31 by abkhefif          #+#    #+#             */
+/*   Updated: 2025/06/04 17:11:09 by abkhefif         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
-int parse_color(char *color_str, int *color)
+int	parse_color(char *color_str, int *color)
 {
-	char *str;
-	int	rgb[3];
-	int i;
-	int current_color;
+	char	*str;
+	int		rgb[3];
+	int		i;
+	int		current_color;
+
 	str = color_str;
 	while (*str == ' ')
 		str++;
 	clean_line_ending(str);
 	i = 0;
 	current_color = 0;
-	rgb[0] = rgb [1] = rgb[2] = 0;
+	rgb[0] = rgb[1] = rgb[2] = 0;
 	while (str[i] && current_color < 3)
 	{
 		if (ft_isdigit(str[i]))
@@ -29,11 +42,12 @@ int parse_color(char *color_str, int *color)
 	return (1);
 }
 
-int parse_texture(char *path_str, char **texture_path)
+int	parse_texture(char *path_str, char **texture_path)
 {
-	char *path;
-	int fd;
-	int len;
+	char	*path;
+	int		fd;
+	int		len;
+
 	path = path_str;
 	while (*path_str == ' ')
 		path_str++;
@@ -41,7 +55,8 @@ int parse_texture(char *path_str, char **texture_path)
 	len = ft_strlen(path);
 	if (len < 4)
 		return (printf("Error: Texture path too short: %s\n", path), 0);
-	if (path[len - 4] != '.' || path[len - 3] != 'x' || path[len - 2] != 'p' || path[len - 1] != 'm')
+	if (path[len - 4] != '.' || path[len - 3] != 'x' || path[len - 2] != 'p'
+		|| path[len - 1] != 'm')
 		return (printf("Error: Texture must be .xpm format: %s\n", path), 0);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
@@ -51,13 +66,13 @@ int parse_texture(char *path_str, char **texture_path)
 	return (*texture_path != NULL);
 }
 
-int parse_cub_file(char *filename, t_game *game)
+int	parse_cub_file(char *filename, t_game *game)
 {
-	int fd;
-	char *line;
-	t_scene_data scene;
+	int				fd;
+	char			*line;
+	t_scene_data	scene;
 
-	ft_memset(&scene, 0 , sizeof(t_scene_data));
+	ft_memset(&scene, 0, sizeof(t_scene_data));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error: Cannot open %s\n", filename), 0);
@@ -74,13 +89,13 @@ int parse_cub_file(char *filename, t_game *game)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close (fd);
+	close(fd);
 	return (finalize_parsing(&scene, game));
 }
 
-int process_line(char *line , t_scene_data *scene, t_game *game)
+int	process_line(char *line, t_scene_data *scene, t_game *game)
 {
-	char *line_content;
+	char	*line_content;
 
 	line_content = line;
 	while (*line_content == ' ' || *line_content == '\t')
@@ -105,7 +120,7 @@ int process_line(char *line , t_scene_data *scene, t_game *game)
 	return (add_map_line(line_content, game, scene));
 }
 
-int add_map_line(char *line, t_game *game, t_scene_data *scene)
+int	add_map_line(char *line, t_game *game, t_scene_data *scene)
 {
 	clean_line_ending(line);
 	if (!game->map.matrix)
@@ -120,12 +135,13 @@ int add_map_line(char *line, t_game *game, t_scene_data *scene)
 	scene->map_count++;
 	return (1);
 }
-int finalize_parsing(t_scene_data *scene, t_game *game)
+
+int	finalize_parsing(t_scene_data *scene, t_game *game)
 {
 	t_texture_paths	paths;
 
-	if (!scene->north_texture || !scene->south_texture || 
-		!scene->west_texture || !scene->east_texture)
+	if (!scene->north_texture || !scene->south_texture || !scene->west_texture
+		|| !scene->east_texture)
 		return (printf("Error: Missing texture(s)\n"), 0);
 	if (scene->map_count == 0)
 		return (printf("Error: No map found\n"), 0);
